@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'services/storage_service.dart';
+
+import 'providers/theme_provider.dart';
 import 'screens/decks_tab.dart';
 import 'screens/review_tab.dart';
 import 'screens/settings_tab.dart';
-import 'providers/theme_provider.dart';
+import 'services/storage_service.dart';
 
 class MyApp extends StatelessWidget {
   final StorageService storage;
   final ThemeProvider themeProvider;
-  
-  const MyApp({
-    required this.storage, 
-    required this.themeProvider, 
-    super.key
-  });
+
+  const MyApp({required this.storage, required this.themeProvider, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +19,13 @@ class MyApp extends StatelessWidget {
       animation: themeProvider,
       builder: (context, child) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'DeckIt',
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(
               seedColor: themeProvider.seedColor,
-              brightness: themeProvider.isDarkMode ? Brightness.dark : Brightness.light,
+              brightness:
+                  themeProvider.isDarkMode ? Brightness.dark : Brightness.light,
             ),
             useMaterial3: true,
           ),
@@ -89,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        final isFirstRouteInCurrentTab = 
+        final isFirstRouteInCurrentTab =
             !await _navigatorKeys[_currentIndex]!.currentState!.maybePop();
         if (isFirstRouteInCurrentTab) {
           if (_currentIndex != 0) {
