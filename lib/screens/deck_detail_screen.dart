@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-
 import '../models/deck.dart';
-import '../services/storage_service.dart';
 import '../widgets/add_card_dialog.dart';
-import '../widgets/delete_confirmation_dialog.dart';
 import '../widgets/edit_card_dialog.dart';
+import '../widgets/delete_confirmation_dialog.dart';
+import '../services/storage_service.dart';
 
 class DeckDetailScreen extends StatefulWidget {
   final Deck deck;
@@ -92,31 +91,16 @@ class _DeckDetailScreenState extends State<DeckDetailScreen> {
             Expanded(
               child: Text(
                 widget.deck.name,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Poppins', // Use a custom font
-                    ),
+                overflow: TextOverflow.ellipsis, // Truncate with ellipsis
+                style: Theme.of(context).textTheme.titleLarge, // Use titleLarge for the text style
               ),
             ),
           ],
         ),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        elevation: 4, // Add elevation for depth
-        shadowColor: Colors.black.withOpacity(0.2), // Add shadow
-        flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [
-                Theme.of(context).colorScheme.primary,
-                Theme.of(context).colorScheme.secondary,
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-          ),
-        ),
+        elevation: 0,
       ),
+
       body: Column(
         children: [
           Container(
@@ -193,13 +177,10 @@ class _DeckDetailScreenState extends State<DeckDetailScreen> {
                         const SizedBox(height: 8),
                         Text(
                           'Add your first flashcard to get started',
-                          style:
-                              Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.color,
-                                  ),
+                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                color:
+                                    Theme.of(context).textTheme.bodySmall?.color,
+                              ),
                         ),
                       ],
                     ),
@@ -258,8 +239,7 @@ class _DeckDetailScreenState extends State<DeckDetailScreen> {
                                       children: [
                                         TextButton.icon(
                                           onPressed: () => _editCard(index),
-                                          icon:
-                                              const Icon(Icons.edit, size: 20),
+                                          icon: const Icon(Icons.edit, size: 20),
                                           label: const Text('Edit'),
                                           style: TextButton.styleFrom(
                                             foregroundColor: Theme.of(context)
@@ -270,8 +250,8 @@ class _DeckDetailScreenState extends State<DeckDetailScreen> {
                                         const SizedBox(width: 8),
                                         TextButton.icon(
                                           onPressed: () => _deleteCard(index),
-                                          icon: const Icon(Icons.delete,
-                                              size: 20),
+                                          icon:
+                                              const Icon(Icons.delete, size: 20),
                                           label: const Text('Delete'),
                                           style: TextButton.styleFrom(
                                             foregroundColor: Theme.of(context)
