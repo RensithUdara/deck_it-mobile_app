@@ -81,25 +81,41 @@ class _DeckDetailScreenState extends State<DeckDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            Icon(
-              Icons.library_books,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                widget.deck.name,
-                overflow: TextOverflow.ellipsis, // Truncate with ellipsis
-                style: Theme.of(context).textTheme.titleLarge, // Use titleLarge for the text style
-              ),
-            ),
-          ],
-        ),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        elevation: 0,
+  title: Row(
+    children: [
+      Icon(
+        Icons.library_books,
+        color: Theme.of(context).colorScheme.primary,
       ),
+      const SizedBox(width: 12),
+      Expanded(
+        child: Text(
+          widget.deck.name,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Poppins', // Use a custom font
+              ),
+        ),
+      ),
+    ],
+  ),
+  backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+  elevation: 4, // Add elevation for depth
+  shadowColor: Colors.black.withOpacity(0.2), // Add shadow
+  flexibleSpace: Container(
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        colors: [
+          Theme.of(context).colorScheme.primary,
+          Theme.of(context).colorScheme.secondary,
+        ],
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+      ),
+    ),
+  ),
+),
 
       body: Column(
         children: [
